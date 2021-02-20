@@ -1,0 +1,182 @@
+﻿@inject SignInManager<ApplicationUser> signInManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - AnsysFanPage</title>
+    <environment include="Development">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    </environment>
+    <environment exclude="Development">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+              crossorigin="anonymous"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.css"
+              asp-fallback-test-class="sr-only"
+              asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"
+              asp-suppress-fallback-integrity="true" />
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+                integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+                crossorigin="anonymous">
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous">
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous">
+        </script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous">
+        </script>
+
+
+
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    Ansys Fan Page
+                    <i class="bi bi-arrow-bar-left"></i>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
+                    <ul class="navbar-nav">
+                        <!--List for Ansys-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="AnsysDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ansys
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="AnsysDropdownMenuLink">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ansys" asp-action="Index">Ansys</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Articles</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="APDLMacros" asp-action="Index">APDL Macros</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Undocummented" asp-action="Index">Undocummented</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="TipsAndTricks" asp-action="Index">Tips & Tricks</a>
+                            </div>
+                        </li>
+                        <!--Engineering-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="EngineeringDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Engineering
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="EngineeringDropdownMenuLink">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="EngineeringTools" asp-action="Index">Engineering Tools</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Articles</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="ManageDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="ManageDropdownMenuLink">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="EngineeringTools" asp-action="Index">Posts</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Articles</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="AdministrationDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administration
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="ManageDropdownMenuLink">
+                                <a class="nav-link text-dark" asp-area="" asp-action="ListUsers" asp-controller="Administration">Users List</a>
+                                <a class="nav-link text-dark" asp-area="" asp-action="ListRoles" asp-controller="Administration">Roles List</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index"></a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="UserDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="UserDropdownMenuLink">
+                                    <a class="nav-link text-dark ml-2" asp-area="" asp-controller="TipsAndTricks" asp-action="Index">Tips & Tricks</a>
+                                    <a class="nav-link text-dark ml-2" asp-area=""asp-action="ChangePassword" asp-controller="Account">Change Password</a>
+
+                                    <form method="post" asp-action="LogOut" asp-controller="Account">
+                                        <button type="submit" class="btn btn-dark ml-2" style="width:auto">LogOut</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-link text-dark">
+                                <a class="nav-link text-dark" asp-action="Register" asp-controller="Account">Register</a>
+                            </li>
+                            <li class="nav-link text-dark">
+                                <a class="nav-link text-dark" asp-action="Login" asp-controller="Account">LogIn</a>
+                            </li>
+                        }
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - AnsysFanPage - <a asp-area="" asp-controller="Home" asp-action="Privacy">About</a>
+        </div>
+    </footer>
+
+
+
+
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
+    @*@RenderSection("Scripts", required: false)*@
+
+    @if (IsSectionDefined("Scripts"))
+    {
+        @RenderSection("Scripts", required: false)
+    }
+
+</body>
+</html>
